@@ -6,10 +6,10 @@ def main():
     Main function
     """
     # Inputs:
-    y0 = float(input("Initial height (m): "));
-    v0 = float(input("Initial velocity (m/s): "));
-    launchAngle = float(input("Initial angle (degrees): "));
-    td = float(input("Instant of time you want to know the stuff: "));
+    y0 = float(input("altura inicial (m): "));
+    v0 = float(input("velocidade inicial (m/s): "));
+    launchAngle = float(input("angulo inicial (degrees): "));
+    td = float(input("tempo d (s): "));
 
     # Constants:
     g = 9.8;
@@ -20,39 +20,52 @@ def main():
     # v0x, v0y
     v0x = vox(v0, launchAngle);
     v0y = voy(v0, launchAngle);
-    print("v0x = %.2f" % v0x);
-    print("v0y = %.2f" % v0y);
+    print("v0x = %.6f" % v0x);
+    print("v0y = %.6f" % v0y);
 
     # time the projectile keeps in the air
     t = totalTime(v0, launchAngle, g);
-    print("Tar = %.2f" % t);
+    print("Tar = %.6f" % t);
 
     # position of the projectile by the time inputed
     xd = positionX(v0x, td);
     yd = positionY(v0y, y0, g, td);
-    print("xd = %.2f" % xd);
-    print("yd = %.2f" % yd);
+    print("xd = %.6f" % xd);
+    print("yd = %.6f" % yd);
 
     #velocity of the projectile at the instant of time inputed
-    print("vx = %.2f" % v0x);
-    print("vy = %.2f" % vy(v0,td, launchAngle, g));
-    print("v = %.2f" % velocityModule(v0x, vy(v0,td, launchAngle, g)));
+    print("vx = %.6f" % v0x);
+    print("vy = %.6f" % vy(v0,td, launchAngle, g));
+    print("v = %.6f" % velocityModule(v0x, vy(v0,td, launchAngle, g)));
 
     # max height
-    print("Max Height = %.2f" % maxHeight(v0, launchAngle, g));
+    print("Altura Máxima = %.6f" % maxHeight(v0, launchAngle, g));
     
     # max range
-    print("Max Range = %.2f" % maxRange(v0x, t));
+    print("Alcance Máximo = %.6f" % maxRange(v0x, t));
 
     # velocity before touching the ground
-    print("vxTouch = %.2f" % vxTouch(v0, launchAngle));
-    print("vyTouch = %.2f" % vyTouch(v0, launchAngle, g, t));
-    print("vTouch = %.2f" % velocityModuleTouch(vxTouch(v0, launchAngle), vyTouch(v0, launchAngle, g, t)));
+    print("vxToque = %.6f" % vxTouch(v0, launchAngle));
+    print("vyToque = %.6f" % vyTouch(v0, launchAngle, g, t));
+    print("vToque = %.6f" % velocityModuleTouch(vxTouch(v0, launchAngle), vyTouch(v0, launchAngle, g, t)));
     
     # when the projectile is at max height
-    print("vxMaxHeight = %.2f" % vxMaxHeight(v0, launchAngle));
-    print("vyMaxHeight = %.2f" % vyMaxHeight(v0, launchAngle, g, t));
-    print("vMaxHeight = %.2f" % vMaxHeight(vxMaxHeight(v0, launchAngle), vyMaxHeight(v0, launchAngle, g, t)));
+    print("vxAlturaMax = %.6f" % vxMaxHeight(v0, launchAngle));
+    print("vyAlturaMax = %.6f" % vyMaxHeight(v0, launchAngle, g, t));
+    print("vAlturaMax = %.6f" % vMaxHeight(vxMaxHeight(v0, launchAngle), vyMaxHeight(v0, launchAngle, g, t)));
+
+    # 2 question
+
+    #constants
+    tcm = 1.8;
+    vm = 0.766;
+    print("x milada = %.6f" % chirpyMilada(tcm,vm));
+    
+
+# chirpy and milada
+def chirpyMilada(t, vx):
+    x = vx*t;
+    return x;
 
 # initial x velocity of the projectile
 def vox(vo, theta):
